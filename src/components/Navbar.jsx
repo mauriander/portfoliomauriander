@@ -1,9 +1,18 @@
 import { m } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import logoMauriander from "../assets/logoMaurianderBG.png";
 
-function Navbar({ items, onNavigate }) {
+function Navbar({
+  items,
+  onNavigate,
+  content,
+  ui,
+  language,
+  theme,
+  onLanguageChange,
+  onThemeChange,
+}) {
   const [activeId, setActiveId] = useState(items[0]?.id || "hero");
   const [menuOpen, setMenuOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
@@ -62,37 +71,21 @@ function Navbar({ items, onNavigate }) {
 
   return (
     <>
-      <div className="fixed left-0 top-0 z-[60] hidden h-8 w-full border-b border-white/10 bg-ink text-mist md:flex">
+      <div className="fixed left-0 top-0 z-[60] hidden h-8 w-full border-b border-white/10 bg-ink text-mist dark:border-white/10 dark:bg-[#060606] md:flex">
         <div className="ticker-inner mono flex min-w-max items-center text-[9px]">
-          {[
-            "Software Developer",
-            "Functional Analyst",
-            "Product Builder",
-            "Portfolio 2026",
-            "Frontend x negocio x ejecucion",
-            "Mauriander",
-          ]
-            .concat([
-              "Software Developer",
-              "Functional Analyst",
-              "Product Builder",
-              "Portfolio 2026",
-              "Frontend x negocio x ejecucion",
-              "Mauriander",
-            ])
-            .map((item, index) => (
-              <span
-                key={`${item}-${index}`}
-                className="border-r border-white/15 px-10 leading-8 text-mist/55"
-              >
-                <span className="text-mist">{item}</span>
-              </span>
-            ))}
+          {content.ticker.concat(content.ticker).map((item, index) => (
+            <span
+              key={`${item}-${index}`}
+              className="border-r border-white/15 px-10 leading-8 text-mist/55"
+            >
+              <span className="text-mist">{item}</span>
+            </span>
+          ))}
         </div>
       </div>
 
       <header
-        className={`fixed left-0 z-50 w-full border-b border-ink bg-mist transition-transform duration-500 ${
+        className={`fixed left-0 z-50 w-full border-b border-ink bg-mist transition-transform duration-500 dark:border-[#f5f2ed] dark:bg-[#111111] ${
           hidden ? "-translate-y-full md:-translate-y-[calc(100%+32px)]" : "translate-y-0"
         } top-0 md:top-8`}
       >
@@ -100,15 +93,17 @@ function Navbar({ items, onNavigate }) {
           <a
             href="#hero"
             onClick={(event) => handleLinkClick(event, "hero")}
-            className="flex h-full items-center gap-3 border-r border-ink px-4 sm:px-7"
-            aria-label="Ir al inicio"
+            className="flex h-full items-center gap-3 border-r border-ink px-4 dark:border-[#f5f2ed] sm:px-7"
+            aria-label={content.brand}
           >
             <img
               src={logoMauriander}
-              alt="Logo de Mauriander"
-              className="h-9 w-9 object-contain grayscale contrast-125 invert"
+              alt={content.brand}
+              className="h-9 w-9 object-contain grayscale contrast-125 invert dark:invert-0"
             />
-            <span className="mono text-[10px] font-medium text-ink">Mauriander</span>
+            <span className="mono text-[10px] font-medium text-ink dark:text-mist">
+              {content.brand}
+            </span>
           </a>
 
           <nav className="hidden h-full flex-1 items-center justify-center md:flex">
@@ -119,10 +114,10 @@ function Navbar({ items, onNavigate }) {
                   key={item.id}
                   href={`#${item.id}`}
                   onClick={(event) => handleLinkClick(event, item.id)}
-                  className={`mono flex h-full items-center border-r px-6 text-[10px] transition ${
+                  className={`mono flex h-full items-center border-r px-5 text-[10px] transition dark:border-white/15 ${
                     isActive
-                      ? "border-ink bg-paper text-ink"
-                      : "border-black/15 text-slate hover:bg-paper hover:text-ink"
+                      ? "border-ink bg-paper text-ink dark:bg-[#1c1c1c] dark:text-mist"
+                      : "border-black/15 text-slate hover:bg-paper hover:text-ink dark:text-[#b5aea4] dark:hover:bg-[#171717] dark:hover:text-mist"
                   }`}
                 >
                   {item.label}
@@ -131,27 +126,58 @@ function Navbar({ items, onNavigate }) {
             })}
           </nav>
 
-          <div className="hidden h-full items-center border-l border-ink md:flex">
-            <div className="px-6 text-right">
-              <div className="text-2xl font-semibold leading-none tracking-[-0.04em] text-ink">
+          <div className="hidden h-full items-center border-l border-ink dark:border-[#f5f2ed] md:flex">
+            <div className="flex h-full items-center border-r border-ink px-2 dark:border-[#f5f2ed]">
+              <span className="mono px-2 text-[9px] text-slate dark:text-[#b5aea4]">
+                {ui.language}
+              </span>
+              {["es", "en"].map((code) => (
+                <button
+                  key={code}
+                  type="button"
+                  onClick={() => onLanguageChange(code)}
+                  className={`mono px-2 py-2 text-[9px] transition ${
+                    language === code
+                      ? "bg-ink text-mist dark:bg-mist dark:text-ink"
+                      : "text-slate dark:text-[#b5aea4]"
+                  }`}
+                >
+                  {code.toUpperCase()}
+                </button>
+              ))}
+            </div>
+
+            <button
+              type="button"
+              onClick={() => onThemeChange(theme === "dark" ? "light" : "dark")}
+              className="flex h-full items-center gap-2 border-r border-ink px-4 text-ink transition hover:bg-paper dark:border-[#f5f2ed] dark:text-mist dark:hover:bg-[#171717]"
+            >
+              {theme === "dark" ? <Sun size={14} /> : <Moon size={14} />}
+              <span className="mono text-[9px]">{theme === "dark" ? ui.light : ui.dark}</span>
+            </button>
+
+            <div className="px-5 text-right">
+              <div className="text-2xl font-semibold leading-none tracking-[-0.04em] text-ink dark:text-mist">
                 06
               </div>
-              <div className="mono mt-1 text-[8px] text-slate">sections indexed</div>
+              <div className="mono mt-1 text-[8px] text-slate dark:text-[#b5aea4]">
+                {content.sectionsIndexed}
+              </div>
             </div>
             <a
               href="#contact"
               onClick={(event) => handleLinkClick(event, "contact")}
-              className="mono flex h-full items-center border-l border-ink px-6 text-[10px] text-ink transition hover:bg-ink hover:text-mist"
+              className="mono flex h-full items-center border-l border-ink px-6 text-[10px] text-ink transition hover:bg-ink hover:text-mist dark:border-[#f5f2ed] dark:text-mist dark:hover:bg-mist dark:hover:text-ink"
             >
-              Contact
+              {content.contact}
             </a>
           </div>
 
           <button
             type="button"
-            className="flex h-full w-14 items-center justify-center border-l border-ink md:hidden"
+            className="flex h-full w-14 items-center justify-center border-l border-ink text-ink dark:border-[#f5f2ed] dark:text-mist md:hidden"
             onClick={() => setMenuOpen((prev) => !prev)}
-            aria-label="Abrir menu"
+            aria-label="menu"
             aria-expanded={menuOpen}
           >
             {menuOpen ? <X size={18} /> : <Menu size={18} />}
@@ -167,13 +193,41 @@ function Navbar({ items, onNavigate }) {
       >
         <div className="flex h-full flex-col">
           <div className="flex h-14 items-center justify-between border-b border-white/10 px-5">
-            <span className="mono text-[10px] text-mist/55">Navigation Index</span>
+            <span className="mono text-[10px] text-mist/55">{content.navigationIndex}</span>
             <button
               type="button"
               className="mono text-[11px] text-mist/55"
               onClick={() => setMenuOpen(false)}
             >
-              close
+              {content.close}
+            </button>
+          </div>
+
+          <div className="border-b border-white/10 px-6 py-4">
+            <div className="flex items-center justify-between gap-3">
+              <span className="mono text-[9px] text-mist/35">{ui.language}</span>
+              <div className="flex gap-2">
+                {["es", "en"].map((code) => (
+                  <button
+                    key={code}
+                    type="button"
+                    onClick={() => onLanguageChange(code)}
+                    className={`mono border border-white/15 px-3 py-2 text-[9px] ${
+                      language === code ? "bg-mist text-ink" : "text-mist/55"
+                    }`}
+                  >
+                    {code.toUpperCase()}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => onThemeChange(theme === "dark" ? "light" : "dark")}
+              className="mono mt-3 flex items-center gap-2 border border-white/15 px-3 py-2 text-[9px] text-mist/75"
+            >
+              {theme === "dark" ? <Sun size={14} /> : <Moon size={14} />}
+              {ui.theme}: {theme === "dark" ? ui.light : ui.dark}
             </button>
           </div>
 
@@ -196,7 +250,7 @@ function Navbar({ items, onNavigate }) {
           </div>
 
           <div className="flex items-center justify-between border-t border-white/10 px-6 py-5">
-            <span className="mono text-[9px] text-mist/30">Portfolio by Mauricio Andermatten</span>
+            <span className="mono text-[9px] text-mist/30">{content.footer}</span>
             <span className="mono text-[9px] text-signal">2026</span>
           </div>
         </div>

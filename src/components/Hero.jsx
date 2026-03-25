@@ -14,11 +14,11 @@ const fadeUp = {
   }),
 };
 
-function Hero({ onNavigate }) {
+function Hero({ onNavigate, content }) {
   return (
     <section
       id="hero"
-      className="editorial-grid relative min-h-[100svh] overflow-hidden bg-ink pt-14 text-mist md:pt-[88px]"
+      className="editorial-grid relative min-h-[100svh] overflow-hidden bg-ink pt-14 text-mist md:pt-[88px] dark:bg-[#060606]"
     >
       <div
         aria-hidden="true"
@@ -41,9 +41,9 @@ function Hero({ onNavigate }) {
             >
               <span className="mono flex items-center gap-4 text-[10px] text-mist/45">
                 <span className="inline-block h-px w-12 bg-white/30" />
-                Software Developer / Functional Analyst
+                {content.role}
               </span>
-              <span className="mono ml-auto text-[10px] text-signal"> 2026</span>
+              <span className="mono ml-auto text-[10px] text-signal">2026</span>
             </m.div>
 
             <m.h1
@@ -64,9 +64,7 @@ function Hero({ onNavigate }) {
               className="mt-10 grid gap-8 border-t border-white/15 pt-6 lg:grid-cols-[minmax(0,540px)_1fr]"
             >
               <p className="font-mono text-[11px] uppercase leading-[1.95] tracking-[0.1em] text-mist/45">
-                Diseno y construyo productos digitales con una mirada que combina
-                desarrollo, analisis funcional y decision de negocio para transformar
-                ideas complejas en sistemas claros, utiles y listos para crecer.
+                {content.intro}
               </p>
 
               <div className="flex flex-col gap-4 sm:flex-row sm:justify-end">
@@ -75,14 +73,14 @@ function Hero({ onNavigate }) {
                   onClick={(event) => onNavigate(event, "#projects")}
                   className="mono inline-flex items-center justify-center border border-white/20 bg-mist px-6 py-4 text-[10px] text-ink transition hover:bg-transparent hover:text-mist"
                 >
-                  View projects
+                  {content.primaryCta}
                 </a>
                 <a
                   href="#contact"
                   onClick={(event) => onNavigate(event, "#contact")}
                   className="mono inline-flex items-center justify-center border border-white/20 px-6 py-4 text-[10px] text-mist/70 transition hover:border-white/60 hover:text-mist"
                 >
-                  Contact index
+                  {content.secondaryCta}
                 </a>
               </div>
             </m.div>
@@ -97,13 +95,9 @@ function Hero({ onNavigate }) {
             animate="visible"
             className="border-b border-white/15 px-6 py-7 md:border-b-0 md:border-r md:px-8 lg:px-14"
           >
-            <p className="mono text-[9px] text-mist/35">Operational frame</p>
+            <p className="mono text-[9px] text-mist/35">{content.frame}</p>
             <div className="mt-4 grid gap-4 sm:grid-cols-3">
-              {[
-                ["05+", "productos lanzados"],
-                ["End to end", "de discovery a release"],
-                ["Systems x Product", "decision tecnica con contexto"],
-              ].map(([value, label]) => (
+              {content.stats.map(([value, label]) => (
                 <div key={label}>
                   <p className="text-4xl font-semibold leading-none tracking-[-0.04em] text-mist">
                     {value}
@@ -124,9 +118,9 @@ function Hero({ onNavigate }) {
             className="group flex items-center justify-between px-6 py-7 text-left transition hover:bg-white/5 md:px-8 lg:px-14"
           >
             <div>
-              <p className="mono text-[9px] text-mist/35">Scroll archive</p>
+              <p className="mono text-[9px] text-mist/35">{content.scrollLabel}</p>
               <p className="mt-3 font-display text-3xl leading-none tracking-[-0.03em] text-mist">
-                Continue to ...
+                {content.scrollTitle}
               </p>
             </div>
             <ArrowDownRight

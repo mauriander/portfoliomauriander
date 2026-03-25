@@ -8,18 +8,18 @@ function SectionTitle({
   meta = "Portfolio Section",
   inverted = false,
 }) {
-  const borderClass = inverted
+  const rootClass = inverted
     ? "border-white/15 bg-ink text-mist"
-    : "border-ink bg-paper text-ink";
+    : "border-ink bg-transparent text-ink dark:border-[#f5f2ed] dark:text-mist";
   const numClass = inverted
     ? "border-white/15 bg-white/5 text-mist/55"
-    : "border-ink bg-brand-100 text-slate";
+    : "border-ink bg-brand-100 text-slate dark:border-[#f5f2ed] dark:bg-[#1b1b1b] dark:text-[#b5aea4]";
   const metaClass = inverted
     ? "border-white/15 text-mist/45"
-    : "border-ink text-slate";
+    : "border-ink text-slate dark:border-[#f5f2ed] dark:text-[#b5aea4]";
 
   return (
-    <div className={`border-b ${borderClass}`}>
+    <div className={`border-b ${rootClass}`}>
       <div className="grid min-h-[52px] grid-cols-[72px_1fr] md:grid-cols-[72px_1fr_180px]">
         <div
           className={`mono flex items-center justify-center border-r text-[10px] ${numClass}`}
@@ -48,10 +48,10 @@ function SectionTitle({
         </h2>
 
         {description ? (
-          <div className="border-l-2 border-current/85 pl-5">
+          <div className={`border-l-2 pl-5 ${inverted ? "border-mist" : "border-ink dark:border-mist"}`}>
             <p
               className={`font-mono text-[11px] uppercase leading-[1.95] tracking-[0.08em] ${
-                inverted ? "text-mist/55" : "text-slate"
+                inverted ? "text-mist/55" : "text-slate dark:text-[#b5aea4]"
               }`}
             >
               {description}

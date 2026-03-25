@@ -50,6 +50,7 @@ function normalizeProject(project = {}) {
     order: Number.isFinite(project.order) ? project.order : 999,
     featured: project.featured !== false,
     status: project.status || "published",
+    translations: isPlainObject(project.translations) ? project.translations : {},
   };
 }
 

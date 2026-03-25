@@ -28,6 +28,15 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .dark body {
+    background:
+      linear-gradient(rgba(245, 242, 237, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(245, 242, 237, 0.04) 1px, transparent 1px),
+      #111111;
+    color: #f5f2ed;
   }
 
   * {
@@ -47,8 +56,16 @@
     background: #f5f2ed;
   }
 
+  .dark ::-webkit-scrollbar-track {
+    background: #111111;
+  }
+
   ::-webkit-scrollbar-thumb {
     background: #1a1a1a;
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    background: #f5f2ed;
   }
 
   img {
