@@ -108,7 +108,7 @@ function Navbar({ items, onNavigate }) {
               alt="Logo de Mauriander"
               className="h-9 w-9 object-contain grayscale contrast-125 invert"
             />
-            <span className="mono text-[10px] font-medium text-ink">Mauriander Archive</span>
+            <span className="mono text-[10px] font-medium text-ink">Mauriander</span>
           </a>
 
           <nav className="hidden h-full flex-1 items-center justify-center md:flex">

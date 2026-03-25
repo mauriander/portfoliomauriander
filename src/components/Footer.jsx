@@ -1,7 +1,7 @@
 const links = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/mauricio-andermatten/" },
   { label: "GitHub", href: "https://github.com/mauriander" },
-  { label: "Email", href: "mailto:hola@mauriander.dev" },
+  { label: "Email", href: "mailto:andermattenmauricio@gmail.com" },
 ];
 
 function Footer() {
@@ -22,8 +22,7 @@ function Footer() {
           <div className="border-b border-white/10 px-6 py-10 md:border-b-0 md:border-r md:px-8">
             <p className="mono text-[9px] text-mist/35">Profile</p>
             <p className="mt-4 max-w-md font-mono text-[11px] uppercase leading-[1.9] tracking-[0.08em] text-mist/48">
-              Portfolio con enfoque editorial brutalista: sistemas, producto y
-              ejecucion tecnica ordenados en una misma narrativa visual.
+            
             </p>
           </div>
 
@@ -50,7 +49,7 @@ function Footer() {
           <span className="mono text-[9px] text-mist/25">
             Copyright {new Date().getFullYear()} Mauricio Andermatten
           </span>
-          <span className="mono text-[9px] text-mist/25">Portfolio archive / Buenos Aires</span>
+          <span className="mono text-[9px] text-mist/25">Portfolio / Esperanza</span>
         </div>
       </div>
     </footer>

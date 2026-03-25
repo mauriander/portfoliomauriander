@@ -43,7 +43,7 @@ function Hero({ onNavigate }) {
                 <span className="inline-block h-px w-12 bg-white/30" />
                 Software Developer / Functional Analyst
               </span>
-              <span className="mono ml-auto text-[10px] text-signal">Archive 2026</span>
+              <span className="mono ml-auto text-[10px] text-signal"> 2026</span>
             </m.div>
 
             <m.h1
@@ -126,7 +126,7 @@ function Hero({ onNavigate }) {
             <div>
               <p className="mono text-[9px] text-mist/35">Scroll archive</p>
               <p className="mt-3 font-display text-3xl leading-none tracking-[-0.03em] text-mist">
-                Continue to dossier
+                Continue to ...
               </p>
             </div>
             <ArrowDownRight
