@@ -23,16 +23,7 @@ function App() {
 
   return (
     <LazyMotion features={domAnimation}>
-      <div className="relative min-h-screen overflow-x-clip bg-mesh font-body text-slate">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
-        >
-          <div className="absolute -left-36 top-0 h-96 w-96 rounded-full bg-brand-300/35 blur-3xl" />
-          <div className="absolute right-[-7rem] top-[24rem] h-[26rem] w-[26rem] rounded-full bg-iris-300/30 blur-3xl" />
-          <div className="absolute bottom-[-9rem] left-1/2 h-[24rem] w-[24rem] -translate-x-1/2 rounded-full bg-brand-200/20 blur-3xl" />
-        </div>
-
+      <div className="min-h-screen overflow-x-clip bg-mist font-body text-slate">
         <Navbar items={navItems} onNavigate={handleAnchorClick} />
 
         <main>

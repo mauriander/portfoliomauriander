@@ -1,45 +1,57 @@
-import { Github, Linkedin, Mail } from "lucide-react";
-
-const social = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/mauricio-andermatten/", icon: Linkedin },
-  { label: "GitHub", href: "https://github.com/mauriander", icon: Github },
-  { label: "Email", href: "mailto:hola@mauriander.dev", icon: Mail },
+const links = [
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/mauricio-andermatten/" },
+  { label: "GitHub", href: "https://github.com/mauriander" },
+  { label: "Email", href: "mailto:hola@mauriander.dev" },
 ];
 
 function Footer() {
   return (
-    <footer className="px-4 pb-8 sm:px-6 lg:px-8">
-      <div className="mx-auto flex max-w-6xl flex-col gap-5 rounded-[1.8rem] border border-white/50 bg-white/55 px-6 py-6 backdrop-blur-2xl sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <p className="font-display text-xl font-semibold tracking-[-0.03em] text-ink">
-            Mauricio Andermatten
-          </p>
-          <p className="mt-1 text-sm text-slate">
-            Software Developer · Functional Analyst · Product Builder
-          </p>
+    <footer className="bg-ink text-mist">
+      <div className="mx-auto max-w-[1440px] border-t border-white/10">
+        <div className="grid md:grid-cols-[280px_1fr_1fr]">
+          <div className="border-b border-white/10 px-6 py-10 md:border-b-0 md:border-r md:px-8">
+            <p className="mono text-[9px] text-mist/35">Project</p>
+            <p className="mt-3 font-display text-3xl leading-none tracking-[-0.03em]">
+              Mauricio Andermatten
+            </p>
+            <p className="mono mt-3 text-[10px] text-mist/35">
+              Software Developer / Functional Analyst
+            </p>
+          </div>
+
+          <div className="border-b border-white/10 px-6 py-10 md:border-b-0 md:border-r md:px-8">
+            <p className="mono text-[9px] text-mist/35">Profile</p>
+            <p className="mt-4 max-w-md font-mono text-[11px] uppercase leading-[1.9] tracking-[0.08em] text-mist/48">
+              Portfolio con enfoque editorial brutalista: sistemas, producto y
+              ejecucion tecnica ordenados en una misma narrativa visual.
+            </p>
+          </div>
+
+          <div className="px-6 py-10 md:px-8">
+            <p className="mono text-[9px] text-mist/35">Links</p>
+            <div className="mt-4 flex flex-col">
+              {links.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  target={item.href.startsWith("http") ? "_blank" : undefined}
+                  rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+                  className="mono flex items-center justify-between border-b border-white/10 py-3 text-[10px] text-mist/55 transition hover:text-mist"
+                >
+                  <span>{item.label}</span>
+                  <span>open</span>
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          {social.map((item) => {
-            const Icon = item.icon;
-            return (
-              <a
-                key={item.label}
-                href={item.href}
-                target={item.href.startsWith("http") ? "_blank" : undefined}
-                rel={item.href.startsWith("http") ? "noreferrer" : undefined}
-                aria-label={item.label}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/55 bg-white/75 text-slate transition hover:text-iris-600"
-              >
-                <Icon size={16} />
-              </a>
-            );
-          })}
+        <div className="flex flex-col gap-2 px-6 py-5 text-center md:flex-row md:items-center md:justify-between md:px-8 md:text-left">
+          <span className="mono text-[9px] text-mist/25">
+            Copyright {new Date().getFullYear()} Mauricio Andermatten
+          </span>
+          <span className="mono text-[9px] text-mist/25">Portfolio archive / Buenos Aires</span>
         </div>
-
-        <p className="text-sm text-slate">
-          Copyright {new Date().getFullYear()} Mauricio Andermatten
-        </p>
       </div>
     </footer>
   );

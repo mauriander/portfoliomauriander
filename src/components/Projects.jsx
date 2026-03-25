@@ -19,69 +19,75 @@ function Projects() {
   const { projects, isLoading, error } = useProjects();
 
   return (
-    <section id="projects" className="px-4 py-24 sm:px-6 lg:px-8 lg:py-28">
-      <div className="mx-auto max-w-6xl">
+    <section id="projects" className="section-shell">
+      <div className="mx-auto max-w-[1440px]">
         <SectionTitle
-          eyebrow="Featured Projects"
-          title="Productos digitales construidos con foco en experiencia y resultado."
-          description="Seleccion de casos donde combine desarrollo, analisis funcional y decision de producto."
+          eyebrow="Selected Work"
+          number="03"
+          meta="Archive / Projects"
+          title="Casos donde combine desarrollo, analisis funcional y criterio de producto."
+          description="Una seleccion de proyectos construidos con foco en experiencia, claridad operacional y resultado."
         />
 
         {error && (
-          <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-amber-300/75 bg-amber-50/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-amber-900">
+          <div className="mx-6 mt-8 inline-flex items-center gap-2 border border-ink bg-paper px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-ink md:mx-8">
             <AlertTriangle size={14} />
             Firestore no disponible, mostrando fallback local
           </div>
         )}
 
         {isLoading ? (
-          <div className="mt-12 grid gap-6 md:grid-cols-2">
+          <div className="grid border-b border-ink md:grid-cols-2">
             {Array.from({ length: 4 }).map((_, index) => (
               <article
                 key={index}
-                className="overflow-hidden rounded-[2rem] border border-white/55 bg-white/60 shadow-panel backdrop-blur-2xl"
+                className={`min-h-[560px] border-ink ${
+                  index % 2 === 0 ? "md:border-r" : ""
+                } border-b last:border-b-0`}
               >
-                <div className="h-2 bg-gradient-to-r from-brand-500/50 via-iris-500/50 to-brand-700/50" />
-                <div className="aspect-[5/3] animate-pulse bg-gradient-to-br from-brand-50 via-white to-iris-50" />
-                <div className="space-y-4 p-7">
-                  <div className="flex items-center gap-2 text-iris-600">
-                    <LoaderCircle size={14} className="animate-spin" />
-                    <span className="text-xs font-semibold uppercase tracking-[0.16em]">
-                      Cargando
-                    </span>
+                <div className="flex h-full flex-col bg-ink">
+                  <div className="aspect-[5/3] animate-pulse bg-neutral-800" />
+                  <div className="flex flex-1 flex-col justify-between p-8 text-mist">
+                    <div>
+                      <div className="inline-flex items-center gap-2 border border-white/15 px-3 py-2 text-[10px] uppercase tracking-[0.16em] text-mist/45">
+                        <LoaderCircle size={14} className="animate-spin" />
+                        cargando
+                      </div>
+                      <div className="mt-5 h-16 w-2/3 animate-pulse bg-white/10" />
+                    </div>
+                    <div className="border-t border-white/10 pt-5">
+                      <div className="h-3 w-1/2 animate-pulse bg-white/10" />
+                    </div>
                   </div>
-                  <div className="h-8 w-2/3 animate-pulse rounded-full bg-white/80" />
-                  <div className="h-4 w-full animate-pulse rounded-full bg-white/70" />
-                  <div className="h-4 w-5/6 animate-pulse rounded-full bg-white/70" />
                 </div>
               </article>
             ))}
           </div>
         ) : (
           <m.div
-            className="mt-12 grid gap-6 md:grid-cols-2"
+            className="grid border-b border-ink md:grid-cols-2"
             variants={{
               hidden: {},
               visible: {
                 transition: {
                   staggerChildren: 0.1,
-                  delayChildren: 0.06,
+                  delayChildren: 0.05,
                 },
               },
             }}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.15 }}
+            viewport={{ once: true, amount: 0.12 }}
           >
-            {projects.map((project) => (
+            {projects.map((project, index) => (
               <m.article
                 key={project.title}
                 variants={cardVariants}
-                whileHover={{ y: -6 }}
-                className="group overflow-hidden rounded-[2rem] border border-white/55 bg-white/58 shadow-panel backdrop-blur-2xl"
+                className={`group relative min-h-[620px] overflow-hidden border-ink ${
+                  index % 2 === 0 ? "md:border-r" : ""
+                } border-b last:border-b-0`}
               >
-                <div className="h-2 bg-gradient-to-r from-brand-500 via-iris-500 to-brand-700" />
-                <div className="aspect-[5/3] overflow-hidden bg-gradient-to-br from-brand-50 via-white to-iris-50">
+                <div className="absolute inset-0">
                   <img
                     src={project.image}
                     alt={project.imageAlt}
@@ -89,35 +95,52 @@ function Projects() {
                     height="720"
                     loading="lazy"
                     decoding="async"
-                    className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
-                    sizes="(min-width: 768px) 45vw, 100vw"
+                    className="h-full w-full object-cover grayscale contrast-125 brightness-[0.56] transition duration-700 group-hover:scale-[1.04]"
+                    sizes="(min-width: 768px) 50vw, 100vw"
                   />
+                  <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(10,10,10,0.88)_0%,rgba(10,10,10,0.34)_60%,transparent_100%),linear-gradient(to_top,rgba(10,10,10,0.92)_0%,transparent_52%)]" />
                 </div>
-                <div className="p-7">
-                  <div className="mb-4 inline-flex rounded-full border border-white/55 bg-white/74 px-3 py-1 text-[0.64rem] font-semibold uppercase tracking-[0.16em] text-iris-600">
-                    {project.category || "Caso de producto"}
+
+                <div className="relative z-10 flex h-full flex-col justify-between p-8 text-mist md:p-10">
+                  <div className="flex items-start justify-between gap-4">
+                    <span className="mono border border-white/15 bg-mist px-3 py-2 text-[9px] text-ink">
+                      {project.category || "Caso de producto"}
+                    </span>
+                    <span className="font-mono text-6xl leading-none tracking-[-0.04em] text-white/10">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
                   </div>
-                  <h3 className="font-display text-[1.95rem] font-semibold tracking-[-0.04em] text-ink">
-                    {project.title}
-                  </h3>
-                  <p className="mt-4 leading-7 text-slate">{project.description}</p>
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    {project.stack.map((item) => (
-                      <span
-                        key={item}
-                        className="rounded-full border border-white/60 bg-white/74 px-3 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-slate"
+
+                  <div>
+                    <p className="mono text-[9px] text-mist/35">Collection / projects</p>
+                    <h3 className="mt-4 max-w-xl font-display text-5xl leading-[0.92] tracking-[-0.03em]">
+                      {project.title}
+                    </h3>
+                    <p className="mt-5 max-w-xl font-mono text-[10px] uppercase leading-[1.85] tracking-[0.08em] text-mist/48">
+                      {project.description}
+                    </p>
+
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {project.stack.map((item) => (
+                        <span
+                          key={item}
+                          className="mono border border-white/15 px-3 py-2 text-[9px] text-mist/48"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="mt-8 flex items-center justify-between border-t border-white/15 pt-4">
+                      <span className="mono text-[10px] text-mist/35">Open case study</span>
+                      <a
+                        href={project.link}
+                        className="flex h-11 w-11 items-center justify-center border border-white/25 text-mist transition group-hover:bg-mist group-hover:text-ink"
                       >
-                        {item}
-                      </span>
-                    ))}
+                        <ExternalLink size={16} />
+                      </a>
+                    </div>
                   </div>
-                  <a
-                    href={project.link}
-                    className="mt-7 inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/74 px-5 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-ink transition hover:bg-white"
-                  >
-                    Ver mas
-                    <ExternalLink size={14} />
-                  </a>
                 </div>
               </m.article>
             ))}

@@ -3,20 +3,28 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    color: #1a1a1a;
+    background: #f5f2ed;
+  }
+
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 7rem;
+    scroll-padding-top: 7.5rem;
   }
 
   body {
     margin: 0;
     min-width: 320px;
     background:
-      radial-gradient(circle at top left, rgba(67, 120, 255, 0.14), transparent 28%),
-      radial-gradient(circle at top right, rgba(127, 92, 255, 0.12), transparent 22%),
-      linear-gradient(180deg, #fbfcff 0%, #eff3ff 56%, #edf2fb 100%);
-    color: #5d6b8a;
-    font-family: "Manrope", sans-serif;
+      linear-gradient(rgba(26, 26, 26, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(26, 26, 26, 0.03) 1px, transparent 1px),
+      #f5f2ed;
+    background-size: 72px 72px, 72px 72px, auto;
+    color: #1a1a1a;
+    font-family: "Barlow Condensed", sans-serif;
+    overflow-x: hidden;
+    cursor: crosshair;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -26,34 +34,88 @@
     box-sizing: border-box;
   }
 
+  a,
+  button {
+    cursor: crosshair;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f5f2ed;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #1a1a1a;
+  }
+
   img {
     display: block;
     max-width: 100%;
   }
 
   ::selection {
-    background: rgba(127, 92, 255, 0.18);
-    color: #10172f;
+    background: rgba(192, 57, 43, 0.18);
+    color: #1a1a1a;
+  }
+}
+
+@layer utilities {
+  .mono {
+    font-family: "IBM Plex Mono", monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .editorial-grid {
+    position: relative;
+  }
+
+  .editorial-grid::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: calc(100% / 12) 100%, 100% 72px;
+    pointer-events: none;
+  }
+
+  .ticker-inner {
+    animation: ticker 30s linear infinite;
+    white-space: nowrap;
+  }
+
+  .section-shell {
+    border-top: 1px solid #1a1a1a;
+  }
+
+  .paper-panel {
+    background: #ede9e2;
+    border: 1px solid #1a1a1a;
+  }
+
+  .ink-panel {
+    background: #1a1a1a;
+    color: #f5f2ed;
+    border: 1px solid #1a1a1a;
+  }
+}
+
+@keyframes ticker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-}
-
-@layer utilities {
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: #ebeff9;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #4378ff, #7f5cff);
-    border-radius: 9999px;
   }
 }

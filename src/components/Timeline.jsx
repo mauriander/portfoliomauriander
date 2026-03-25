@@ -9,7 +9,7 @@ const journey = [
     type: "Experiencia",
     icon: Rocket,
     description:
-      "Desarrollo productos digitales end-to-end con foco en velocidad de entrega y calidad de experiencia.",
+      "Desarrollo productos digitales end-to-end con foco en velocidad de entrega, claridad tecnica y calidad de experiencia.",
   },
   {
     year: "2024",
@@ -17,7 +17,7 @@ const journey = [
     type: "Experiencia",
     icon: ScanSearch,
     description:
-      "Traduccion de procesos de negocio en requerimientos funcionales claros y backlog priorizado.",
+      "Traduccion de procesos de negocio en requerimientos funcionales claros, backlog priorizado y decisiones implementables.",
   },
   {
     year: "2023",
@@ -25,7 +25,7 @@ const journey = [
     type: "Producto",
     icon: Wrench,
     description:
-      "Creacion y evolucion de iniciativas propias con enfoque en validacion temprana y crecimiento sostenible.",
+      "Creacion y evolucion de iniciativas propias con enfoque en validacion temprana, aprendizaje y crecimiento sostenible.",
   },
   {
     year: "Formacion",
@@ -33,23 +33,26 @@ const journey = [
     type: "Educacion",
     icon: GraduationCap,
     description:
-      "Base analitica fuerte en sistemas para tomar decisiones tecnicas con contexto de negocio.",
+      "Base analitica fuerte en sistemas para tomar decisiones tecnicas con contexto real de negocio.",
   },
 ];
 
 function Timeline() {
   return (
-    <section id="journey" className="px-4 py-24 sm:px-6 lg:px-8 lg:py-28">
-      <div className="mx-auto max-w-6xl">
+    <section id="journey" className="section-shell">
+      <div className="mx-auto max-w-[1440px]">
         <SectionTitle
-          eyebrow="Experiencia / Educacion"
-          title="Evolucion profesional construida sobre tecnologia y producto."
+          eyebrow="Experience / Education"
+          number="04"
+          meta="Timeline / Journey"
+          title="Evolucion profesional construida sobre tecnologia, producto y lectura de contexto."
           description="Una trayectoria orientada a resolver problemas complejos con ejecucion pragmatica y pensamiento sistemico."
         />
 
-        <div className="relative mt-14 border-l border-white/55 pl-7 sm:pl-10">
+        <div className="border-b border-ink">
           {journey.map((item, index) => {
             const Icon = item.icon;
+
             return (
               <m.article
                 key={`${item.year}-${item.title}`}
@@ -58,28 +61,30 @@ function Timeline() {
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{
                   duration: 0.48,
-                  delay: index * 0.06,
+                  delay: index * 0.05,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="relative mb-8 rounded-[1.6rem] border border-white/55 bg-white/58 p-6 shadow-sm backdrop-blur-2xl last:mb-0"
+                className="grid border-b border-ink last:border-b-0 md:grid-cols-[96px_220px_1fr]"
               >
-                <span className="absolute -left-[2.45rem] top-8 inline-flex h-9 w-9 items-center justify-center rounded-full border border-white bg-gradient-to-br from-brand-500 to-iris-600 text-white shadow-glow">
-                  <Icon size={15} />
-                </span>
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-iris-600">
-                      {item.type}
-                    </p>
-                    <h3 className="mt-2 font-display text-3xl font-semibold tracking-[-0.04em] text-ink">
-                      {item.title}
-                    </h3>
-                  </div>
-                  <span className="inline-flex rounded-full border border-white/55 bg-white/75 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-slate">
-                    {item.year}
-                  </span>
+                <div className="border-b border-ink px-6 py-7 md:border-b-0 md:border-r">
+                  <p className="mono text-[10px] text-slate">{item.year}</p>
                 </div>
-                <p className="mt-4 leading-7 text-slate">{item.description}</p>
+                <div className="flex items-center gap-3 border-b border-ink px-6 py-7 md:border-b-0 md:border-r">
+                  <div className="flex h-10 w-10 items-center justify-center border border-ink">
+                    <Icon size={16} />
+                  </div>
+                  <div>
+                    <p className="mono text-[9px] text-slate">{item.type}</p>
+                  </div>
+                </div>
+                <div className="px-6 py-7 md:px-8">
+                  <h3 className="text-[15px] font-semibold uppercase tracking-[0.08em] text-ink">
+                    {item.title}
+                  </h3>
+                  <p className="mt-3 font-mono text-[10px] uppercase leading-[1.85] tracking-[0.08em] text-slate">
+                    {item.description}
+                  </p>
+                </div>
               </m.article>
             );
           })}

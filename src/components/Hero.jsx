@@ -1,14 +1,13 @@
-import { m, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { ArrowDown, Download, Sparkles } from "lucide-react";
-import { useRef } from "react";
+import { m } from "framer-motion";
+import { ArrowDownRight } from "lucide-react";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 26 },
+  hidden: { opacity: 0, y: 24 },
   visible: (delay = 0) => ({
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.72,
+      duration: 0.65,
       delay,
       ease: [0.22, 1, 0.36, 1],
     },
@@ -16,166 +15,127 @@ const fadeUp = {
 };
 
 function Hero({ onNavigate }) {
-  const sectionRef = useRef(null);
-  const prefersReducedMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-
-  const floatY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    prefersReducedMotion ? [0, 0] : [0, 80]
-  );
-  const contentY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    prefersReducedMotion ? [0, 0] : [0, -26]
-  );
-  const glowOpacity = useTransform(
-    scrollYProgress,
-    [0, 1],
-    prefersReducedMotion ? [1, 1] : [1, 0.6]
-  );
-
   return (
     <section
       id="hero"
-      ref={sectionRef}
-      className="relative flex min-h-[calc(100vh-76px)] items-center px-4 pb-20 pt-16 sm:px-6 lg:px-8"
+      className="editorial-grid relative min-h-[100svh] overflow-hidden bg-ink pt-14 text-mist md:pt-[88px]"
     >
-      <m.div
+      <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0"
-        style={{ opacity: glowOpacity }}
-      >
-        <m.div
-          className="absolute left-[-7rem] top-[-5rem] h-[24rem] w-[24rem] rounded-full bg-brand-400/35 blur-3xl"
-          style={{ y: floatY }}
-        />
-        <m.div
-          className="absolute right-[-9rem] top-[6rem] h-[26rem] w-[26rem] rounded-full bg-iris-400/30 blur-3xl"
-          style={{ y: floatY }}
-        />
-        <m.div
-          className="absolute bottom-[-11rem] left-1/2 h-[22rem] w-[22rem] -translate-x-1/2 rounded-full bg-brand-200/24 blur-3xl"
-          style={{ y: floatY }}
-        />
-      </m.div>
+        className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(0,0,0,0.12)_2px,rgba(0,0,0,0.12)_4px)] opacity-70"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,10,10,0.12)_0%,rgba(10,10,10,0.38)_55%,rgba(10,10,10,0.92)_100%)]"
+      />
 
-      <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
-        <m.div style={{ y: contentY }}>
-          <m.div
-            custom={0.04}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            className="mb-7 inline-flex items-center gap-2 rounded-full border border-white/55 bg-white/65 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-iris-600 backdrop-blur-xl"
-          >
-            <Sparkles size={14} />
-            Software Developer / Functional Analyst
-          </m.div>
-
-          <m.h1
-            custom={0.1}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            className="max-w-4xl font-display text-5xl font-semibold leading-[0.95] tracking-[-0.05em] text-ink sm:text-6xl lg:text-[5.4rem]"
-          >
-            Mauricio Andermatten
-          </m.h1>
-
-          <m.p
-            custom={0.18}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            className="mt-7 max-w-3xl text-lg leading-8 text-slate sm:text-xl"
-          >
-            Diseno y construyo productos digitales con mirada tecnica y de negocio:
-            desarrollo, analisis funcional y estrategia para convertir ideas en
-            soluciones reales.
-          </m.p>
-
-          <m.div
-            custom={0.24}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            className="mt-11 flex flex-col gap-4 sm:flex-row"
-          >
-            <a
-              href="#projects"
-              onClick={(event) => onNavigate(event, "#projects")}
-              className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-brand-500 via-brand-600 to-iris-600 px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.16em] text-white shadow-glow transition hover:scale-[1.01]"
+      <div className="relative z-10 mx-auto grid min-h-[calc(100svh-56px)] max-w-[1440px] grid-rows-[1fr_auto]">
+        <div className="flex items-end px-6 pb-14 pt-12 sm:px-8 lg:px-14">
+          <div className="w-full">
+            <m.div
+              custom={0.04}
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              className="mb-8 flex flex-wrap items-center gap-4"
             >
-              Ver proyectos
-            </a>
-            <a
-              href="#contact"
-              onClick={(event) => onNavigate(event, "#contact")}
-              className="inline-flex items-center justify-center rounded-full border border-white/55 bg-white/72 px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.16em] text-ink backdrop-blur-xl transition hover:bg-white"
-            >
-              Contactar
-            </a>
-            <a
-              href="#"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/40 bg-white/35 px-6 py-3.5 text-sm font-semibold uppercase tracking-[0.16em] text-slate backdrop-blur-xl transition hover:border-white/70 hover:text-ink"
-            >
-              <Download size={16} />
-              Descargar CV
-            </a>
-          </m.div>
-        </m.div>
+              <span className="mono flex items-center gap-4 text-[10px] text-mist/45">
+                <span className="inline-block h-px w-12 bg-white/30" />
+                Software Developer / Functional Analyst
+              </span>
+              <span className="mono ml-auto text-[10px] text-signal">Archive 2026</span>
+            </m.div>
 
-        <m.aside
-          custom={0.22}
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          style={{ y: floatY }}
-          className="rounded-[2rem] border border-white/55 bg-white/50 p-6 shadow-panel backdrop-blur-2xl sm:p-8"
-        >
-          <div className="grid gap-5">
-            <div className="rounded-3xl border border-white/40 bg-gradient-to-br from-[#111a3a] via-brand-700 to-iris-600 p-6 text-white">
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">
-                Enfoque
+            <m.h1
+              custom={0.1}
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              className="max-w-6xl font-display text-[3.8rem] leading-[0.88] tracking-[-0.04em] text-mist sm:text-[5.7rem] lg:text-[8.6rem]"
+            >
+              Mauricio <em className="text-mist/35">Andermatten</em>
+            </m.h1>
+
+            <m.div
+              custom={0.18}
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              className="mt-10 grid gap-8 border-t border-white/15 pt-6 lg:grid-cols-[minmax(0,540px)_1fr]"
+            >
+              <p className="font-mono text-[11px] uppercase leading-[1.95] tracking-[0.1em] text-mist/45">
+                Diseno y construyo productos digitales con una mirada que combina
+                desarrollo, analisis funcional y decision de negocio para transformar
+                ideas complejas en sistemas claros, utiles y listos para crecer.
               </p>
-              <p className="mt-4 font-display text-2xl leading-tight">
-                Producto, tecnologia y ejecucion orientada a resultados.
-              </p>
-            </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              {[
-                ["+5", "productos lanzados"],
-                ["End-to-end", "de discovery a entrega"],
-              ].map(([value, label]) => (
-                <div
-                  key={label}
-                  className="rounded-2xl border border-white/55 bg-white/72 p-5 backdrop-blur-xl"
+              <div className="flex flex-col gap-4 sm:flex-row sm:justify-end">
+                <a
+                  href="#projects"
+                  onClick={(event) => onNavigate(event, "#projects")}
+                  className="mono inline-flex items-center justify-center border border-white/20 bg-mist px-6 py-4 text-[10px] text-ink transition hover:bg-transparent hover:text-mist"
                 >
-                  <p className="font-display text-3xl font-semibold tracking-[-0.04em] text-ink">
+                  View projects
+                </a>
+                <a
+                  href="#contact"
+                  onClick={(event) => onNavigate(event, "#contact")}
+                  className="mono inline-flex items-center justify-center border border-white/20 px-6 py-4 text-[10px] text-mist/70 transition hover:border-white/60 hover:text-mist"
+                >
+                  Contact index
+                </a>
+              </div>
+            </m.div>
+          </div>
+        </div>
+
+        <div className="grid border-t border-white/15 md:grid-cols-[1.05fr_0.95fr]">
+          <m.div
+            custom={0.22}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="border-b border-white/15 px-6 py-7 md:border-b-0 md:border-r md:px-8 lg:px-14"
+          >
+            <p className="mono text-[9px] text-mist/35">Operational frame</p>
+            <div className="mt-4 grid gap-4 sm:grid-cols-3">
+              {[
+                ["05+", "productos lanzados"],
+                ["End to end", "de discovery a release"],
+                ["Systems x Product", "decision tecnica con contexto"],
+              ].map(([value, label]) => (
+                <div key={label}>
+                  <p className="text-4xl font-semibold leading-none tracking-[-0.04em] text-mist">
                     {value}
                   </p>
-                  <p className="mt-1 text-sm text-slate">{label}</p>
+                  <p className="mono mt-2 text-[9px] text-mist/35">{label}</p>
                 </div>
               ))}
             </div>
-          </div>
-        </m.aside>
-      </div>
+          </m.div>
 
-      <button
-        type="button"
-        onClick={(event) => onNavigate(event, "#about")}
-        className="group absolute bottom-8 left-1/2 inline-flex -translate-x-1/2 items-center gap-2 rounded-full border border-white/55 bg-white/65 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate backdrop-blur-xl transition hover:text-ink"
-      >
-        Scroll
-        <ArrowDown size={14} className="transition group-hover:translate-y-0.5" />
-      </button>
+          <m.button
+            type="button"
+            custom={0.28}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            onClick={(event) => onNavigate(event, "#about")}
+            className="group flex items-center justify-between px-6 py-7 text-left transition hover:bg-white/5 md:px-8 lg:px-14"
+          >
+            <div>
+              <p className="mono text-[9px] text-mist/35">Scroll archive</p>
+              <p className="mt-3 font-display text-3xl leading-none tracking-[-0.03em] text-mist">
+                Continue to dossier
+              </p>
+            </div>
+            <ArrowDownRight
+              size={28}
+              className="text-mist/50 transition group-hover:translate-x-1 group-hover:translate-y-1 group-hover:text-mist"
+            />
+          </m.button>
+        </div>
+      </div>
     </section>
   );
 }

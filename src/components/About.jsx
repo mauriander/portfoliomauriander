@@ -1,86 +1,126 @@
 import { m } from "framer-motion";
-import { BriefcaseBusiness, Code2, Lightbulb, Workflow } from "lucide-react";
 import SectionTitle from "./SectionTitle";
 
 const blocks = [
-  {
-    icon: Code2,
-    title: "Desarrollo robusto",
-    text: "Construyo frontends y flujos de producto con foco en claridad, performance y mantenibilidad.",
-  },
-  {
-    icon: Workflow,
-    title: "Analisis funcional",
-    text: "Transformo requerimientos difusos en historias accionables, reglas claras y decisiones tecnicas concretas.",
-  },
-  {
-    icon: Lightbulb,
-    title: "Product thinking",
-    text: "Priorizo impacto real: validacion temprana, iteraciones cortas y roadmap conectado a negocio.",
-  },
-  {
-    icon: BriefcaseBusiness,
-    title: "Mentalidad emprendedora",
-    text: "Trabajo con ownership, orientado a resultados y a construir ventajas competitivas sostenibles.",
-  },
+  "Desarrollo robusto",
+  "Analisis funcional",
+  "Product thinking",
+  "Mentalidad emprendedora",
 ];
 
 function About() {
   return (
-    <section id="about" className="px-4 py-24 sm:px-6 lg:px-8 lg:py-28">
-      <div className="mx-auto max-w-6xl">
+    <section id="about" className="section-shell">
+      <div className="mx-auto max-w-[1440px]">
         <SectionTitle
           eyebrow="Sobre mi"
-          title="Tecnologia, analisis de sistemas y negocio en una misma capa de trabajo."
-          description="Mi perfil combina ejecucion tecnica con pensamiento estrategico para crear productos digitales que realmente se usan, escalan y aportan valor."
+          number="01"
+          meta="Definition / Profile"
+          title="Tecnologia, sistemas y negocio trabajando como una sola capa de decision."
+          description="Mi perfil combina ejecucion tecnica con pensamiento estrategico para crear productos digitales claros, mantenibles y conectados con el uso real."
         />
 
-        <div className="mt-14 grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="grid border-b border-ink lg:grid-cols-[1fr_1fr]">
           <m.article
-            initial={{ opacity: 0, y: 22 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.35 }}
+            viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-            className="rounded-[2rem] border border-white/55 bg-white/55 p-8 shadow-panel backdrop-blur-2xl lg:p-10"
+            className="border-b border-ink px-6 py-12 lg:border-b-0 lg:border-r lg:px-10 lg:py-16"
           >
-            <p className="text-lg leading-8 text-slate">
-              Me especializo en convertir ideas de negocio en experiencias digitales
-              claras. Trabajo desde discovery y definicion funcional hasta implementacion
-              y mejora continua, cuidando experiencia de usuario, arquitectura y
-              viabilidad operativa.
-            </p>
-            <p className="mt-6 text-lg leading-8 text-slate">
-              No solo escribo codigo: conecto personas, procesos y producto para que la
-              tecnologia sea una herramienta de crecimiento, no un costo de complejidad.
-            </p>
+            <h3 className="font-display text-4xl leading-[1] tracking-[-0.03em] text-ink sm:text-5xl">
+              Construyo productos con foco en <em className="text-slate">claridad</em>,
+              velocidad y sostenibilidad.
+            </h3>
+
+            <div className="mt-8 border-l-2 border-ink pl-5">
+              <p className="font-mono text-[11px] uppercase leading-[1.95] tracking-[0.08em] text-slate">
+                Me especializo en convertir ideas de negocio en experiencias digitales
+                concretas. Trabajo desde discovery y definicion funcional hasta
+                implementacion y mejora continua, cuidando experiencia, arquitectura y
+                viabilidad operativa.
+              </p>
+            </div>
+
+            <div className="mt-10 grid border-y border-ink sm:grid-cols-2">
+              {[
+                ["05+", "productos y casos ejecutados"],
+                ["360", "vision de producto a release"],
+              ].map(([value, label], index) => (
+                <div
+                  key={label}
+                  className={`px-0 py-5 ${index === 0 ? "border-b border-ink sm:border-b-0 sm:pr-6" : "sm:border-l sm:pl-6"}`}
+                >
+                  <p className="text-5xl font-semibold leading-none tracking-[-0.04em] text-ink">
+                    {value}
+                  </p>
+                  <p className="mono mt-2 text-[9px] text-slate">{label}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 flex flex-wrap gap-2">
+              {blocks.map((block) => (
+                <span
+                  key={block}
+                  className="mono border border-ink px-3 py-2 text-[9px] text-slate transition hover:bg-ink hover:text-mist"
+                >
+                  {block}
+                </span>
+              ))}
+            </div>
           </m.article>
 
-          <div className="grid gap-5 sm:grid-cols-2">
-            {blocks.map((block, index) => {
-              const Icon = block.icon;
-              return (
-                <m.article
-                  key={block.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{
-                    duration: 0.45,
-                    delay: index * 0.06,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className="rounded-[1.6rem] border border-white/50 bg-gradient-to-br from-white/70 to-white/40 p-6 shadow-sm backdrop-blur-xl"
+          <div className="flex flex-col">
+            <div className="flex items-center justify-between border-b border-ink px-6 py-5 lg:px-10">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-ink">
+                Profile timeline
+              </p>
+              <p className="mono text-[9px] text-slate">04 nodes</p>
+            </div>
+
+            <div className="flex-1">
+              {[
+                [
+                  "01",
+                  "Discovery to execution",
+                  "Conecto requerimientos difusos con backlog claro, decisiones tecnicas y entrega concreta.",
+                ],
+                [
+                  "02",
+                  "Pensamiento sistemico",
+                  "No solo escribo codigo: ordeno procesos, contexto de negocio y experiencia de usuario.",
+                ],
+                [
+                  "03",
+                  "Iteracion con criterio",
+                  "Priorizo impacto real, mantenibilidad y una velocidad que no comprometa la calidad.",
+                ],
+                [
+                  "04",
+                  "Ownership integral",
+                  "Trabajo como socio de producto: detecto riesgos, destrabo decisiones y sostengo el resultado.",
+                ],
+              ].map(([year, title, text]) => (
+                <article
+                  key={title}
+                  className="grid grid-cols-[72px_1fr] border-b border-ink last:border-b-0"
                 >
-                  <div className="mb-4 inline-flex rounded-xl border border-white/60 bg-white/70 p-2.5 text-iris-600">
-                    <Icon size={18} />
+                  <div className="relative flex items-start justify-center border-r border-ink px-3 py-7">
+                    <span className="mono text-[10px] text-slate">{year}</span>
+                    <span className="absolute right-[-4px] top-8 h-[7px] w-[7px] rounded-full border border-ink bg-paper" />
                   </div>
-                  <h3 className="font-display text-2xl font-semibold tracking-[-0.03em] text-ink">
-                    {block.title}
-                  </h3>
-                  <p className="mt-3 leading-7 text-slate">{block.text}</p>
-                </m.article>
-              );
-            })}
+                  <div className="px-6 py-7 lg:px-8">
+                    <h4 className="text-[15px] font-semibold uppercase tracking-[0.06em] text-ink">
+                      {title}
+                    </h4>
+                    <p className="mt-3 font-mono text-[10px] uppercase leading-[1.8] tracking-[0.08em] text-slate">
+                      {text}
+                    </p>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </div>
